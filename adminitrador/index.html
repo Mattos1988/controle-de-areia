@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <title>Admin — Controle de Areia</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand-mark">AD</div>
+  <div>
+    <h1>Administrador</h1>
+    <p>Consulta os dados enviados pelos motoristas</p>
+  </div>
+</header>
+<main>
+  <section class="panel">
+    <h2>Importar arquivo JSON do motorista</h2>
+    <label>Selecione o arquivo
+      <input id="fileInput" type="file" accept=".json">
+    </label>
+    <button id="importBtn" class="primary full">Importar Dados</button>
+    <button id="clearAdmin" class="secondary full">Limpar base importada</button>
+  </section>
+
+  <section class="panel">
+    <h2>Filtros</h2>
+    <div class="form-grid">
+      <label>Data inicial <input id="filterStart" type="date"></label>
+      <label>Data final <input id="filterEnd" type="date"></label>
+      <label>Motorista <select id="filterDriver"><option value="">Todos</option></select></label>
+      <label>Placa <select id="filterPlate"><option value="">Todos</option></select></label>
+    </div>
+    <button id="applyFilter" class="primary full">Aplicar Filtro</button>
+  </section>
+
+  <section class="panel">
+    <h2>Resumo Consolidado</h2>
+    <div id="adminSummary" class="report-paper"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Lista de viagens (apenas leitura)</h2>
+    <div id="adminTripList" class="list"></div>
+  </section>
+
+  <div class="actions">
+    <button id="adminPrintPdf" class="primary">Imprimir / Salvar PDF</button>
+  </div>
+</main>
+
+<div id="toastAdmin" class="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>
