@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <title>Controle de Areia — Motorista</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<section id="startDayPanel" class="start-screen">
+  <div class="start-card">
+    <div class="brand-mark">CA</div>
+    <h1>Controle de Areia</h1>
+    <p>Preencha os dados para iniciar o dia de trabalho</p>
+    <form id="startDayForm">
+      <label>Nome do motorista
+        <input id="startDriverName" required placeholder="Digite seu nome">
+      </label>
+      <label>Placa do caminhão
+        <input id="startTruckPlate" required placeholder="ABC1D23" maxlength="7">
+      </label>
+      <label>Modelo do caminhão (opcional)
+        <input id="startTruckModel" placeholder="Ex: Atron 2729">
+      </label>
+      <button class="primary full" type="submit">Iniciar o Dia</button>
+    </form>
+  </div>
+</section>
+
+<div id="mainApp" class="hidden">
+  <header class="topbar">
+    <div class="brand-mark">CA</div>
+    <div>
+      <h1>Controle de Areia</h1>
+      <p>Motorista: <span id="dayDriver"></span> · Placa: <span id="dayTruck"></span></p>
+    </div>
+  </header>
+
+  <main>
+    <section class="summary-grid">
+      <article class="metric"><span>Viagens hoje</span><strong id="todayTrips">0</strong></article>
+      <article class="metric"><span>Volume hoje</span><strong id="todayVolume">0 m³</strong></article>
+      <article class="metric"><span>Areia fina</span><strong id="fineTrips">0</strong><small id="fineVolume">0 m³</small></article>
+      <article class="metric"><span>Areia grossa</span><strong id="coarseTrips">0</strong><small id="coarseVolume">0 m³</small></article>
+    </section>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="tripPanel">Nova viagem</button>
+      <button class="tab" data-tab="historyPanel">Histórico</button>
+      <button class="tab" data-tab="reportPanel">Relatório</button>
+    </nav>
+
+    <section id="tripPanel" class="panel">
+      <h2>Registrar viagem</h2>
+      <form id="tripForm">
+        <div class="form-grid">
+          <label>Tipo de areia
+            <select id="sandType">
+              <option>Fina</option>
+              <option>Grossa</option>
+            </select>
+          </label>
+          <label>Destino
+            <select id="destination">
+              <option>Depósito de distribuição</option>
+              <option>Cliente final</option>
+            </select>
+          </label>
+          <label class="wide">Nome do depósito ou cliente
+            <input id="destinationName" placeholder="Opcional">
+          </label>
+          <label>Volume (m³)
+            <input id="volume" type="number" min="0.1" step="0.1" value="15" required>
+          </label>
+          <label>Horário
+            <input id="tripTime" type="time" required>
+          </label>
+          <label class="wide">Observação
+            <textarea id="notes" rows="2" placeholder="Opcional"></textarea>
+          </label>
+        </div>
+        <button class="primary full" type="submit">Registrar viagem</button>
+      </form>
+    </section>
+
+    <section id="historyPanel" class="panel hidden">
+      <h2>Histórico de viagens</h2>
+      <input id="historyDate" type="date">
+      <div id="historyList" class="list"></div>
+    </section>
+
+    <section id="reportPanel" class="panel hidden">
+      <h2>Relatório do dia</h2>
+      <div id="reportContent" class="report-paper"></div>
+      <div class="actions">
+        <button id="exportBackup" class="primary">Baixar arquivo JSON (para o administrador)</button>
+        <button id="exportPdf" class="secondary">Imprimir / Salvar PDF</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div id="toast" class="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>
